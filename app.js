@@ -3,12 +3,16 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import {index, store} from './controllers/CategoryController.js'
 import indexRouter from './routes/index.js';
+import cors from 'cors'
 
 const env=dotenv.config().parsed;
 var app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({
+    origin:'http://localhost:8000',
+}));
 
 app.use('/', indexRouter);
 app.get('/categories',index)
